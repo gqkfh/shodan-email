@@ -78,3 +78,17 @@ def print_title():
 if __name__ == '__main__':
     print_title()
     main()
+
+# obtener todos los datos del query
+    
+'''
+<!DOCTYPE html>
+
+<html>
+
+
+
+<head>
+
+  <!-- Ba...
+'''
