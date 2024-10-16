@@ -12,8 +12,15 @@ class color:
 url = 'https://www.shodan.io/search?query='
 ip_api = 'https://api.techniknews.net/ipgeo/'
 
+def error(text):
+    print(color.WHITE + '\n[*] Error: ' + color.WHITE + text)
+    main()
+
 def main():
     query = input(color.WHITE + '[*] Enter the query to search: ')
+    if not '@' in query:
+        error('No email detected')
+
     res = requests.get(str(url + query))
     html_content = res.text
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -47,7 +54,8 @@ def main():
                     file.write('\n') 
 
         else:
-            file.write("Failure getting the element\n") 
+            file.write('Failure Getting the element')
+            error('Failure getting the element')
 
 def clear():
     if os.name == 'nt': 
