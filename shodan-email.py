@@ -21,7 +21,7 @@ def error(text):
     main()
 
 def ret():
-    print(color.WHITE + '\n[*] Finished to write the {color.RED}results.txt{color.WHITE} file')
+    print(color.WHITE + f'\n[*] Finished to write the {color.RED}results.txt{color.WHITE} file')
     choice = input(color.WHITE + '[*] Press ENTER to return the menu: ')
     main()
 
