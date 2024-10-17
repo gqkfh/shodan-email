@@ -1,6 +1,4 @@
-import requests
-import re
-import os
+import requests, re, os
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
 
@@ -14,6 +12,11 @@ ip_api = 'https://api.techniknews.net/ipgeo/'
 
 def error(text):
     print(color.WHITE + '\n[*] Error: ' + color.WHITE + text)
+    main()
+
+def ret():
+    print(color.WHITE + '\n[*] Finished to write the {color.RED}results.txt{color.WHITE} file')
+    choice = input(color.WHITE + '[*] Press ENTER to return the menu: ')
     main()
 
 def main():
@@ -50,7 +53,7 @@ def main():
                     for key, value in headers.items():
                         file.write(f'{key}: {value}\n') 
                     
-                    file.write('\n' + '=' * 50 + '\n')  # Separador entre resultados
+                    file.write('\n' + '=' * 50 + '\n')
         else:
             file.write('No results found.\n')
             error('No results found.')
@@ -76,3 +79,4 @@ def print_title():
 if __name__ == '__main__':
     print_title()
     main()
+    ret()
