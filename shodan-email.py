@@ -1,6 +1,12 @@
-import requests, re, os
-from bs4 import BeautifulSoup
-from colorama import Fore, Style
+import os
+
+try:
+    import requests, re
+    from bs4 import BeautifulSoup
+    from colorama import Fore, Style
+
+except:
+    os.system('pip install requests beautifulsoup colorama')
 
 class color:
     RED = Fore.RED + Style.BRIGHT
@@ -56,7 +62,7 @@ def main():
                     file.write('\n' + '=' * 50 + '\n')
         else:
             file.write('No results found.\n')
-            error('No results found.')
+            error('No results found')
 
 def clear():
     if os.name == 'nt': 
