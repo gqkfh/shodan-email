@@ -24,25 +24,24 @@ def main():
     res = requests.get(str(url + query))
     html_content = res.text
     soup = BeautifulSoup(html_content, 'html.parser')
-    div_with_class = soup.find('div', class_='columns ten')
-
+    
     with open('results.txt', 'a') as file:  
-        if div_with_class:
-            desired_elements = div_with_class.find_all('pre')
-            for desired_element in desired_elements:
-                file.write(desired_element.text + '\n')  
-
-        link_elements = soup.find_all('a', class_='title text-dark')
-        if link_elements:
-            for link_element in link_elements:
-                ip_text = link_element.text
+        result_divs = soup.find_all('div', class_='result')
+        
+        if result_divs:
+            for div in result_divs:
+                ip_element = div.find('pre')
+                if ip_element:
+                    file.write(ip_element.text + '\n')
                 
                 ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
+                ip_text = div.get_text()
                 result = re.search(ip_pattern, ip_text)
 
                 if result:
                     address = result.group(0)
-                    file.write(f'IP found: {address}\n') 
+                    file.write(f'IP found: {address}\n')
+                    file.write(f'Result: {div.text.strip()}\n')
                     file.write('-' * 50 + '\n')  
 
                     res = requests.get(str(ip_api + address))
@@ -52,10 +51,9 @@ def main():
                         file.write(f'{key}: {value}\n') 
                     
                     file.write('\n') 
-
         else:
-            file.write('Failure Getting the element')
-            error('Failure getting the element')
+            file.write('No results found.\n')
+            error('No results found.')
 
 def clear():
     if os.name == 'nt': 
@@ -78,17 +76,3 @@ def print_title():
 if __name__ == '__main__':
     print_title()
     main()
-
-# obtener todos los datos del query
-    
-'''
-<!DOCTYPE html>
-
-<html>
-
-
-
-<head>
-
-  <!-- Ba...
-'''
