@@ -6,7 +6,7 @@ try:
     from colorama import Fore, Style
 
 except:
-    os.system('pip install requests beautifulsoup colorama')
+    os.system('pip install requests beautifulsoup4 colorama')
 
 class color:
     RED = Fore.RED + Style.BRIGHT
