@@ -32,7 +32,7 @@ def main():
             for div in result_divs:
                 ip_element = div.find('pre')
                 if ip_element:
-                    file.write(ip_element.text + '\n')
+                    file.write(f'Result Data:\n{ip_element.text}\n')
                 
                 ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
                 ip_text = div.get_text()
@@ -50,7 +50,7 @@ def main():
                     for key, value in headers.items():
                         file.write(f'{key}: {value}\n') 
                     
-                    file.write('\n') 
+                    file.write('\n' + '=' * 50 + '\n')  # Separador entre resultados
         else:
             file.write('No results found.\n')
             error('No results found.')
